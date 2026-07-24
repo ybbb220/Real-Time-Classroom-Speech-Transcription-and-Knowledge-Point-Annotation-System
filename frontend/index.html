@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>课堂实时语音转写与知识点自动标注系统</title>
+
+    <link rel="stylesheet" href="css/index.css">
+</head>
+
+<body>
+
+    <header class="header">
+
+        <div class="logo">
+
+            🎓 课堂实时语音转写与知识点自动标注系统
+
+        </div>
+
+        <div class="user-info">
+
+            欢迎，
+            <span id="currentUser"></span>
+
+            <button id="logoutBtn">
+
+                退出登录
+
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <div class="container">
+
+        <!-- 左侧菜单 -->
+
+        <aside class="sidebar">
+
+            <ul>
+
+                <li class="active" data-page="home">
+
+                    🏠 首页
+
+                </li>
+
+                <li data-page="speech">
+
+                    🎤 实时转写
+
+                </li>
+
+                <li data-page="knowledge">
+
+                    📚 知识点标注
+
+                </li>
+
+                <li data-page="setting">
+
+                    ⚙ 系统设置
+
+                </li>
+
+            </ul>
+
+        </aside>
+
+        <main class="content">
+
+            <!-- 首页 -->
+
+            <section id="home" class="page active-page">
+
+                <h2>系统概览</h2>
+
+                <div class="cards">
+
+                    <div class="card">
+
+                        <h3>今日识别</h3>
+
+                        <p id="todayCount">0</p>
+
+                    </div>
+
+                    <div class="card">
+
+                        <h3>知识点数量</h3>
+
+                        <p id="knowledgeCount">0</p>
+
+                    </div>
+
+                    <div class="card">
+
+                        <h3>系统状态</h3>
+
+                        <p class="green">
+
+                            ● 正常运行
+
+                        </p>
+
+                    </div>
+
+                    <div class="card">
+
+                        <h3>当前模型</h3>
+
+                        <p>
+
+                            Qwen3-ASR
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div class="welcome">
+
+                    欢迎使用课堂实时语音转写与知识点自动标注系统。
+
+                </div>
+
+            </section>
+
+            <!-- 实时转写 -->
+
+            <section id="speech" class="page">
+
+                <h2>实时语音转写</h2>
+
+                <!-- 文件上传区域 -->
+                <div class="upload-area" id="uploadArea">
+                    <div class="upload-icon">🎙️</div>
+                    <p>点击或拖拽上传音频文件</p>
+                    <p class="upload-hint">支持 PCM / WAV 格式（16kHz 单声道）</p>
+                    <input type="file" id="audioFileInput" accept=".pcm,.wav">
+                </div>
+
+                <div id="uploadStatus" class="upload-status hidden"></div>
+
+                <div
+                        id="speechText"
+                        class="speech-display"
+                        data-placeholder="这里将显示课堂语音转写内容……"></div>
+
+                <div class="button-group">
+
+                    <button id="startBtn" disabled>
+                        上传并转写
+                    </button>
+
+                    <button id="stopBtn" class="btn-secondary">
+                        清空结果
+                    </button>
+
+                </div>
+
+            </section>
+
+            <!-- 知识点 -->
+
+            <section id="knowledge" class="page">
+
+                <h2>知识点标注</h2>
+
+                <!-- 知识库管理区 -->
+                <div class="kb-manage">
+                    <h3>📋 知识库管理</h3>
+                    <div class="kb-input-row">
+                        <input type="text" id="kbInput" placeholder="输入知识点内容，例如：函数极限的定义" maxlength="500">
+                        <button id="kbAddBtn">添加</button>
+                    </div>
+                    <ul class="kb-list" id="kbList">
+                        <li class="kb-empty">加载中…</li>
+                    </ul>
+                </div>
+
+                <div class="kb-divider"></div>
+
+                <!-- 转写匹配结果区 -->
+                <h3>🔍 最近转写匹配结果</h3>
+                <ul class="knowledge-list" id="matchList">
+                    <li style="color:#999;">尚未进行语音转写</li>
+                </ul>
+
+            </section>
+
+            <!-- 设置 -->
+
+            <section id="setting" class="page">
+
+                <h2>系统设置</h2>
+
+                <div class="setting-item">
+
+                    默认ASR模型：
+
+                    <strong>Qwen3-ASR</strong>
+
+                </div>
+
+                <div class="setting-item">
+
+                    检索模型：
+
+                    <strong>BGE Base v1.5</strong>
+
+                </div>
+
+                <div class="setting-item">
+
+                    向量数据库：
+
+                    <strong>FAISS</strong>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+    <script src="js/index.js"></script>
+
+</body>
+
+</html>

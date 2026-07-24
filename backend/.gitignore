@@ -1,0 +1,14 @@
+# 环境变量
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# 上传文件
+uploads/
+
+# IDE
+.vscode/
+.idea/
